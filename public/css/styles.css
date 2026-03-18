@@ -1,19 +1,14 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* CSS Variables */
+/* Base Styles and Mobile First */
 :root {
-  --bg-color: #0d1117;
-  --text-color: #e6edf3;
-  --primary-color: #58a6ff;
-  --primary-hover: #1f6feb;
-  --secondary-bg: #161b22;
-  --card-bg: rgba(22, 27, 34, 0.7);
-  --border-color: #30363d;
-  --gradient: linear-gradient(135deg, #7928CA 0%, #FF0080 100%);
+  --primary-color: #00c3ff; /* Cyan for accents and button */
+  --text-dark: #222222;
+  --bg-dark: #2c2f33; /* Dark background for Nav */
+  --link-color: #0000ee; /* Standard accessible blue */
 }
 
-/* Reset and Base Styles */
 *,
 *:before,
 *:after {
@@ -23,31 +18,17 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  line-height: 1.5;
+  font-size: 16px;
 }
 
-a {
-  text-decoration: none;
-  color: var(--primary-color);
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--primary-hover);
-}
-
-/* Layout Wrapper */
 #wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
 }
 
 /* Header */
@@ -55,172 +36,239 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0 20px 0;
 }
 
 .siteName a {
-  font-size: 1.8rem;
-  font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #1a1a1a;
 }
 
 #tools a {
-  font-weight: 600;
-  background: var(--secondary-bg);
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #333333;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
 #tools a:hover {
-  background: var(--primary-color);
-  color: #fff;
-  border-color: var(--primary-color);
+  text-decoration: underline;
 }
 
 /* Navigation */
 nav {
-  background: rgba(22, 27, 34, 0.5);
-  backdrop-filter: blur(10px);
-  margin: 20px 0;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  padding: 15px 20px;
+  background-color: var(--bg-dark);
+  padding: 10px 0px;
+  margin-bottom: 20px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 30px;
-  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 nav li {
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: color 0.3s ease;
+  padding: 5px 10px;
+  transition: color 0.3s;
 }
 
 nav li:hover {
   color: var(--primary-color);
 }
 
-/* Main Content */
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+/* Main Heading */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #111;
 }
 
 /* Hero Section */
 .hero {
-  border-radius: 20px;
-  background: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.9)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000') center/cover;
-  padding: 100px 40px;
-  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero-image-container {
   position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  width: 100%;
+  max-width: 600px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  margin: 0 auto;
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  line-height: 1.2;
+.hero-overlay {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  width: 50%;
+  max-width: 250px;
 }
 
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: #8b949e;
-  margin-bottom: 40px;
-}
-
-.btn-primary {
-  display: inline-block;
-  background: var(--gradient);
-  padding: 15px 35px;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 0, 128, 0.5);
-  color: #fff;
-}
-
-/* Features Section */
-.features {
-  padding: 20px 0;
-}
-
-.section-title {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 40px;
-  font-weight: 800;
-}
-
-.feature-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: center;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary-color);
-}
-
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.card h3 {
+h2 {
   font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.hero-overlay h2 {
+  font-size: 1.3rem;
+  color: #0088b3; /* Darker cyan for contrast */
+  margin-bottom: 5px;
+}
+
+.hero-overlay ul {
+  list-style: none;
   margin-bottom: 15px;
 }
 
-.card p {
-  color: #8b949e;
+.hero-overlay li {
+  color: #0088b3;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+/* Updated button style to match requested image "Own Today" design */
+.hero-overlay .own-today-btn {
+  /* Applying style if we want to mimic a button, or just limit width of image */
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  display: block;
+  background-color: #0088b3;
+  padding: 2px;
+}
+
+/* For image-based button from site/own_today.png, it seems the image wasn't perfect, let's style a CSS button instead of image if required, but since "own_today.png" exists, we used img tag. Let's make sure it looks good. */
+
+/* Content Container */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Reviews List */
+.reviews ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.reviews li {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* Upgrades Grid */
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  max-width: 500px;
+}
+
+.upgrades figure {
+  text-align: center;
+}
+
+.upgrade-img-bg {
+  background-color: #00a8e8;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #111;
+  margin-bottom: 5px;
+  height: 100px; /* Fixed height for consistency */
+}
+
+.upgrade-img-bg img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.upgrades figcaption a {
+  color: var(--link-color);
+  font-size: 1.1rem;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.upgrades figcaption a:hover {
+  text-decoration: none;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 30px 0;
   margin-top: 40px;
-  border-top: 1px solid var(--border-color);
-  color: #8b949e;
+  font-size: 1rem;
+  padding-top: 10px;
+  font-weight: 700;
+}
+
+/* --- Media Queries for Larger Screens --- */
+
+@media screen and (min-width: 768px) {
+  /* Set checkerboard background on body */
+  body {
+    background-image: url('../images/site/checkerboard.jpg');
+    /* Depending on how checkerboard looks, it might need to repeat */
+  }
+
+  /* Style wrapper to emulate white box with borders */
+  #wrapper {
+    max-width: 900px;
+    margin: 30px auto;
+    border: 5px solid #00c3ff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    background-color: #ffffff;
+  }
+
+  /* Row layout for container: left = upgrades, right = reviews */
+  .content-container {
+    flex-direction: row-reverse; /* Reverses DOM order, places Upgrades Left, Reviews Right */
+    justify-content: space-between;
+  }
+  
+  .upgrades {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .reviews {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-image-container {
+    max-width: 800px; /* Make it larger for large screen if possible */
+  }
+
+  /* Make grid spacing a bit wider */
+  .upgrades-grid {
+    gap: 20px;
+  }
 }
