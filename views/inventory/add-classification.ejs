@@ -1,0 +1,35 @@
+<div class="login-container inventory-container">
+  <h1><%= title %></h1>
+  
+  <%- messages() %>
+
+  <p class="required-notice">ALL FIELDS ARE REQUIRED.</p>
+
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+    </ul>
+  <% } %>
+
+  <form id="addClassificationForm" class="login-form" action="/inv/add-classification" method="POST">
+    <div class="form-group">
+      <label for="classification_name" class="form-label">Classification Name</label>
+      <span class="password-requirements">NAME MUST BE ALPHANUMERIC ONLY (NO SPACES OR SPECIAL CHARACTERS)</span>
+      <input 
+        type="text" 
+        id="classification_name" 
+        name="classification_name" 
+        class="form-input" 
+        required 
+        placeholder="Enter classification name" 
+        value="<%= locals.classification_name %>"
+        pattern="^[a-zA-Z0-9]+$"
+        title="Classification name must be alphanumeric only (no spaces or special characters)."
+      >
+    </div>
+
+    <button type="submit" class="submit-btn primary-btn">Add Classification</button>
+  </form>
+</div>
