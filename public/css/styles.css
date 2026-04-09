@@ -53,6 +53,7 @@ body {
   color: #333333;
   text-transform: uppercase;
   transition: color 0.3s ease;
+  margin-left: 15px;
 }
 
 #tools a:hover {
@@ -591,3 +592,46 @@ textarea:required:valid {
   border-right: 5px solid #28a745;
   border-left: 5px solid #28a745;
 }
+/* --- Inventory Management Table --- */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #ddd;
+}
+
+#inventoryDisplay thead {
+  background-color: #0088b3;
+  color: #fff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: #f1f3f5;
+  transition: background-color 0.2s ease;
+}
+
+#inventoryDisplay td a {
+  color: #0088b3;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#inventoryDisplay td a:hover {
+  color: #005f7a;
+  text-decoration: underline;
+} 
+
