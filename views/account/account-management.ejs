@@ -1,14 +1,36 @@
-<h1><%= title %></h1>
-<%- messages() %>
+<div class="account-management">
+  <div class="account-welcome">
+    <h2>Welcome <%= locals.accountData.account_firstname %></h2>
+    <p>Manage your account settings and preferences</p>
+  </div>
 
-<% if (errors) { %>
-  <ul class="notice">
- <% errors.array().forEach(error => { %>
-   <li><%= error.msg %></li>
-<%  }) %>
-  </ul>
-<% } %>
+  <%- messages() %>
 
-<h2>Welcome <%= locals.accountData.account_firstname %></h2>
-<p>You're logged in.</p>
-<p><a href="/account/update">Edit Account Information</a></p>
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  <div class="account-actions">
+    <div class="action-card">
+      <h3>Account Information</h3>
+      <p>Update your personal details including name and email address.</p>
+      <a href="/account/update/<%= locals.accountData.account_id %>" class="action-link">
+        Update Account →
+      </a>
+    </div>
+
+    <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+      <div class="action-card">
+        <h3>Inventory Management</h3>
+        <p>Access the vehicle inventory management system to add, edit, and manage vehicles.</p>
+        <a href="/inv/" class="action-link">
+          Manage Inventory →
+        </a>
+      </div>
+    <% } %>
+  </div>
+</div>

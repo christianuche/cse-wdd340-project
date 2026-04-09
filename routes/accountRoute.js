@@ -6,7 +6,7 @@ const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
 
 // Default route for account management
-router.get("/", utilities.handleErrors(accountController.buildManagement))
+router.get("/", utilities.checkJWTToken, utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
 
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -29,5 +29,31 @@ router.post(
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 )
+
+// Route to build account update view
+router.get("/update/:account_id", utilities.checkJWTToken, utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccount));
+
+// Route to process account update
+router.post(
+  "/update-account",
+  utilities.checkJWTToken,
+  utilities.checkLogin,
+  regValidate.updateAccountRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
+)
+
+// Route to process password update
+router.post(
+  "/update-password",
+  utilities.checkJWTToken,
+  utilities.checkLogin,
+  regValidate.updatePasswordRules(),
+  regValidate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
+)
+
+// Route to logout
+router.get("/logout", utilities.handleErrors(accountController.accountLogout))
 
 module.exports = router;

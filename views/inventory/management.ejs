@@ -1,20 +1,44 @@
-<h1><%= title %></h1>
+<div class="inventory-management">
+  <div class="inventory-header">
+    <h1><%= title %></h1>
+  </div>
 
-<%- messages() %>
+  <%- messages() %>
 
-<ul>
-  <li><a href="/inv/add-classification">Add New Classification</a></li>
-  <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
-</ul>
+  <div class="inventory-actions">
+    <div class="action-card">
+      <h3>Add Classification</h3>
+      <p>Create a new vehicle classification category for organizing inventory.</p>
+      <a href="/inv/add-classification" class="action-link">
+        Add Classification →
+      </a>
+    </div>
 
-<h2>Manage Inventory</h2>
-<p>Select a classification from the list to see the items belonging to the classification.</p>
-<%- classificationSelect %>
+    <div class="action-card">
+      <h3>Add Vehicle</h3>
+      <p>Add a new vehicle to the inventory with all specifications and details.</p>
+      <a href="/inv/add-inventory" class="action-link">
+        Add Vehicle →
+      </a>
+    </div>
+  </div>
 
-<table id="inventoryDisplay"></table>
+  <div class="inventory-section">
+    <h2>Manage Existing Inventory</h2>
+    <p>Select a classification from the dropdown below to view and manage vehicles in that category.</p>
 
-<noscript>
-  JavaScript must be enabled to use this page.
-</noscript>
+    <div class="classification-selector">
+      <%- classificationSelect %>
+    </div>
+
+    <table id="inventoryDisplay"></table>
+
+    <div class="noscript-message">
+      <noscript>
+        JavaScript must be enabled to use this inventory management feature.
+      </noscript>
+    </div>
+  </div>
+</div>
 
 <script src="/js/inventory.js"></script>

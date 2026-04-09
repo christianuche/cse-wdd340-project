@@ -222,4 +222,69 @@ invCont.editInventoryView = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Update inventory item
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  } = req.body
+
+  const result = await invModel.updateInventory(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+
+  if (result) {
+    const itemName = `${result.inv_make} ${result.inv_model}`
+    req.flash(
+      "notice",
+      `The ${itemName} was successfully updated.`
+    )
+    res.redirect("/inv/")
+  } else {
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", `Sorry, updating the ${itemName} failed.`)
+    res.redirect(`/inv/edit/${inv_id}`)
+  }
+}
+
+/* ***************************
+ *  Delete inventory item
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  const result = await invModel.deleteInventory(inv_id)
+
+  if (result) {
+    req.flash(
+      "notice",
+      `The vehicle was successfully deleted.`
+    )
+    res.redirect("/inv/")
+  } else {
+    req.flash("notice", "Sorry, deleting the vehicle failed.")
+    res.redirect("/inv/")
+  }
+}
+
 module.exports = invCont
