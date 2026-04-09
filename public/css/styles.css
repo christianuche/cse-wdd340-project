@@ -1128,6 +1128,58 @@ textarea:focus {
   color: var(--primary-hover);
 }
 
+/* Classification Management Table */
+#classificationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  background-color: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+#classificationTable thead {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #374151 100%);
+  color: white;
+}
+
+#classificationTable th,
+#classificationTable td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#classificationTable th {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#classificationTable td {
+  color: var(--text-dark);
+}
+
+#classificationTable tbody tr:hover {
+  background-color: var(--bg-light);
+}
+
+#classificationTable a {
+  color: var(--error-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+#classificationTable a:hover {
+  background-color: var(--error-color);
+  color: white;
+}
+
 /* NoScript Message */
 .noscript-message {
   background-color: var(--warning-color);

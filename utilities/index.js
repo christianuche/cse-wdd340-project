@@ -106,6 +106,25 @@ Util.buildClassificationList = async function (classification_id = null) {
     return classificationList
 }
 
+/* **************************************
+ * Build the classification management list
+ * ************************************ */
+Util.buildClassificationManagementList = async function () {
+    let data = await invModel.getClassifications()
+    let classificationList = '<table id="classificationTable">'
+    classificationList += '<thead>'
+    classificationList += '<tr><th>Classification Name</th><th>&nbsp;</th></tr>'
+    classificationList += '</thead>'
+    classificationList += '<tbody>'
+    data.rows.forEach((row) => {
+        classificationList += `<tr><td>${row.classification_name}</td>`
+        classificationList += `<td><a href='/inv/delete-classification/${row.classification_id}' title='Click to delete'>Delete</a></td></tr>`
+    })
+    classificationList += '</tbody>'
+    classificationList += '</table>'
+    return classificationList
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

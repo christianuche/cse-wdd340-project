@@ -48,10 +48,12 @@ invCont.triggerError = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next) {
     let nav = await utilities.getNav()
     const classificationSelect = await utilities.buildClassificationList()
+    const classificationManagement = await utilities.buildClassificationManagementList()
     res.render("./inventory/management", {
         title: "Vehicle Management",
         nav,
         classificationSelect,
+        classificationManagement,
         errors: null,
     })
 }
@@ -283,6 +285,25 @@ invCont.deleteInventory = async function (req, res, next) {
     res.redirect("/inv/")
   } else {
     req.flash("notice", "Sorry, deleting the vehicle failed.")
+    res.redirect("/inv/")
+  }
+}
+
+/* ***************************
+ *  Delete classification item
+ * ************************** */
+invCont.deleteClassification = async function (req, res, next) {
+  const classification_id = parseInt(req.params.classification_id)
+  const result = await invModel.deleteClassification(classification_id)
+
+  if (result) {
+    req.flash(
+      "notice",
+      `The classification was successfully deleted.`
+    )
+    res.redirect("/inv/")
+  } else {
+    req.flash("notice", "Sorry, the classification cannot be deleted because it contains vehicles.")
     res.redirect("/inv/")
   }
 }

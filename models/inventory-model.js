@@ -139,6 +139,27 @@ async function deleteInventory(inv_id) {
     }
 }
 
+/* ***************************
+ *  Delete Classification Item
+ * ************************** */
+async function deleteClassification(classification_id) {
+    try {
+        // First check if there are any vehicles in this classification
+        const checkSql = 'SELECT COUNT(*) as count FROM public.inventory WHERE classification_id = $1'
+        const checkResult = await pool.query(checkSql, [classification_id])
+        
+        if (checkResult.rows[0].count > 0) {
+            return null // Cannot delete if vehicles exist
+        }
+        
+        const sql = 'DELETE FROM public.classification WHERE classification_id = $1'
+        const data = await pool.query(sql, [classification_id])
+        return data
+    } catch (error) {
+        console.error("deleteClassification error: " + error)
+    }
+}
+
 module.exports = {
     getClassifications,
     getInventoryByClassificationId,
@@ -146,5 +167,6 @@ module.exports = {
     addClassification,
     addInventory,
     updateInventory,
-    deleteInventory
+    deleteInventory,
+    deleteClassification
 };

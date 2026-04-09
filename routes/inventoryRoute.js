@@ -50,6 +50,8 @@ router.post(
 );
 // Route to delete inventory item
 router.get("/delete/:inv_id", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
+// Route to delete classification item
+router.get("/delete-classification/:classification_id", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.deleteClassification))
 // Route to update inventory item
 router.post(
     "/update",
