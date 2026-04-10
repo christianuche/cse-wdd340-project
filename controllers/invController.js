@@ -84,10 +84,12 @@ invCont.addClassification = async function (req, res, next) {
         )
         let nav = await utilities.getNav()
         const classificationSelect = await utilities.buildClassificationList()
+        const classificationManagement = await utilities.buildClassificationManagementList()
         res.status(201).render("./inventory/management", {
             title: "Vehicle Management",
             nav,
             classificationSelect,
+            classificationManagement,
             errors: null,
         })
     } else {
@@ -152,10 +154,12 @@ invCont.addInventory = async function (req, res, next) {
         )
         let nav = await utilities.getNav()
         const classificationSelect = await utilities.buildClassificationList()
+        const classificationManagement = await utilities.buildClassificationManagementList()
         res.status(201).render("./inventory/management", {
             title: "Vehicle Management",
             nav,
             classificationSelect,
+            classificationManagement,
             errors: null,
         })
     } else {
