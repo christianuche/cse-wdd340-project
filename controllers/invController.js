@@ -20,6 +20,19 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Enhancement: Build recent inventory view
+ * ************************** */
+invCont.buildRecentInventory = async function (req, res, next) {
+    const results = await invModel.getRecentInventory(10)
+    let nav = await utilities.getNav()
+    res.render("./inventory/recent", {
+        title: "Recently Added Vehicles",
+        nav,
+        results,
+    })
+}
+
+/* ***************************
  *  Build inventory item detail view
  * ************************** */
 invCont.buildByItemId = async function (req, res, next) {
@@ -54,6 +67,42 @@ invCont.buildManagement = async function (req, res, next) {
         nav,
         classificationSelect,
         classificationManagement,
+        errors: null,
+    })
+}
+
+/* ***************************
+ *  Enhancement: Build search inventory page
+ * ************************** */
+invCont.buildSearchInventory = async function (req, res, next) {
+    let nav = await utilities.getNav()
+    const classificationSelect = await utilities.buildClassificationList(null, false)
+    res.render("./inventory/search", {
+        title: "Search Inventory",
+        nav,
+        classificationSelect,
+        results: null,
+        query: "",
+        classification_id: "",
+        errors: null,
+    })
+}
+
+/* ***************************
+ *  Enhancement: Perform inventory search
+ * ************************** */
+invCont.searchInventory = async function (req, res, next) {
+    const { query: searchTerm, classification_id } = req.query
+    const results = await invModel.searchInventory(searchTerm, classification_id || null)
+    let nav = await utilities.getNav()
+    const classificationSelect = await utilities.buildClassificationList(classification_id || null, false)
+    res.render("./inventory/search", {
+        title: "Search Inventory",
+        nav,
+        classificationSelect,
+        results,
+        query: searchTerm || "",
+        classification_id: classification_id || "",
         errors: null,
     })
 }

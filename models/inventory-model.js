@@ -26,6 +26,23 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* ***************************
+ *  Enhancement: Get most recently added inventory items
+ * ************************** */
+async function getRecentInventory(limit = 10) {
+    try {
+        const sql = `SELECT i.*, c.classification_name FROM public.inventory AS i
+            JOIN public.classification AS c
+            ON i.classification_id = c.classification_id
+            ORDER BY i.inv_id DESC LIMIT $1`
+        const data = await pool.query(sql, [limit])
+        return data.rows
+    } catch (error) {
+        console.error("getRecentInventory error: " + error)
+        return []
+    }
+}
+
+/* ***************************
  *  Get detailed info for a single inventory item by inv_id
  * ************************** */
 async function getInventoryByItemId(inv_id) {
@@ -85,6 +102,40 @@ async function addInventory(
         ])
     } catch (error) {
         return error.message
+    }
+}
+
+/* ***************************
+ *  Enhancement: Search inventory by make/model and classification
+ * ************************** */
+async function searchInventory(searchTerm, classification_id = null) {
+    try {
+        let sql = `SELECT i.*, c.classification_name FROM public.inventory AS i
+            JOIN public.classification AS c
+            ON i.classification_id = c.classification_id`
+        const params = []
+        const conditions = []
+
+        if (searchTerm) {
+            params.push(`%${searchTerm}%`)
+            conditions.push(`(i.inv_make ILIKE $${params.length} OR i.inv_model ILIKE $${params.length})`)
+        }
+
+        if (classification_id) {
+            params.push(classification_id)
+            conditions.push(`i.classification_id = $${params.length}`)
+        }
+
+        if (conditions.length > 0) {
+            sql += ' WHERE ' + conditions.join(' AND ')
+        }
+
+        sql += ' ORDER BY i.inv_id DESC'
+        const data = await pool.query(sql, params)
+        return data.rows
+    } catch (error) {
+        console.error("searchInventory error: " + error)
+        return []
     }
 }
 
@@ -168,5 +219,7 @@ module.exports = {
     addInventory,
     updateInventory,
     deleteInventory,
-    deleteClassification
+    deleteClassification,
+    searchInventory,
+    getRecentInventory
 };

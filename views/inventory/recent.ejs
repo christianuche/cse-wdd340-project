@@ -1,0 +1,43 @@
+<div class="inventory-recent-page">
+  <div class="inventory-header">
+    <h1><%= title %></h1>
+  </div>
+
+  <%- messages() %>
+
+  <div class="inventory-section recent-panel">
+    <p>These are the last 10 vehicles added to the inventory. Click a vehicle to view full details or modify it.</p>
+
+    <% if (results && results.length > 0) { %>
+      <table class="recent-results-table">
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Year</th>
+            <th>Classification</th>
+            <th>Price</th>
+            <th>Added</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach(vehicle => { %>
+            <tr>
+              <td><%= vehicle.inv_make %> <%= vehicle.inv_model %></td>
+              <td><%= vehicle.inv_year %></td>
+              <td><%= vehicle.classification_name %></td>
+              <td>$<%= new Intl.NumberFormat('en-US').format(vehicle.inv_price) %></td>
+              <td><%= vehicle.inv_id %></td>
+              <td>
+                <a href="/inv/detail/<%= vehicle.inv_id %>">View</a>
+                <a href="/inv/edit/<%= vehicle.inv_id %>">Modify</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p class="notice">No recent vehicles are available.</p>
+    <% } %>
+  </div>
+</div>

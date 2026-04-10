@@ -1,5 +1,5 @@
 const utilities = require(".")
-const { body, validationResult } = require("express-validator")
+const { body, query, validationResult } = require("express-validator")
 const validate = {}
 
 /*  **********************************
@@ -141,6 +141,45 @@ validate.checkInventoryData = async (req, res, next) => {
             inv_miles,
             inv_color,
             classification_id
+        })
+        return
+    }
+    next()
+}
+
+/* ******************************
+ * Search data validation rules
+ * ***************************** */
+validate.searchRules = () => {
+    return [
+        query("query")
+            .optional({ checkFalsy: true })
+            .trim()
+            .escape(),
+        query("classification_id")
+            .optional({ checkFalsy: true })
+            .isNumeric()
+            .withMessage("Please select a valid classification."),
+    ]
+}
+
+/* ******************************
+ * Check data and return errors or continue to search inventory
+ * ***************************** */
+validate.checkSearchData = async (req, res, next) => {
+    const { query: searchTerm, classification_id } = req.query
+    let errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        let classificationSelect = await utilities.buildClassificationList(classification_id, false)
+        res.render("inventory/search", {
+            errors,
+            title: "Search Inventory",
+            nav,
+            classificationSelect,
+            results: [],
+            query: searchTerm,
+            classification_id,
         })
         return
     }

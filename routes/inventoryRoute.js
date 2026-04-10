@@ -20,6 +20,20 @@ router.get("/edit/:inv_id", utilities.checkJWTToken, utilities.checkAccountType,
 // Route for inventory management view
 router.get("/", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.buildManagement));
 
+// Enhancement: Route to search inventory
+router.get("/search", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.buildSearchInventory));
+router.get(
+    "/search/results",
+    utilities.checkJWTToken,
+    utilities.checkAccountType,
+    invValidate.searchRules(),
+    invValidate.checkSearchData,
+    utilities.handleErrors(invController.searchInventory)
+)
+
+// Enhancement: Route to recent inventory
+router.get("/recent", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.buildRecentInventory));
+
 // Route to get inventory as JSON
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 

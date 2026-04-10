@@ -815,6 +815,120 @@ textarea:required:valid {
   margin-top: 4px;
   font-weight: 500;
 }
+
+/* Enhancement: search inventory page styling */
+.inventory-search-page {
+  max-width: 960px;
+  margin: 40px auto;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.inventory-search-page .inventory-header {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 28px 32px;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.inventory-search-page .search-form {
+  padding: 32px;
+}
+
+.inventory-search-page .search-results {
+  padding: 32px;
+  border-top: 1px solid var(--border-color);
+}
+
+.inventory-search-page .search-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.inventory-search-page .search-results-table th,
+.inventory-search-page .search-results-table td {
+  border: 1px solid var(--border-color);
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.inventory-search-page .search-results-table th {
+  background: #eff6ff;
+  color: var(--text-dark);
+}
+
+.inventory-search-page .search-results-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.inventory-search-page .search-results-table a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.inventory-search-page .search-results-table a:hover {
+  color: var(--primary-hover);
+}
+
+/* Enhancement: recent inventory page styling */
+.inventory-recent-page {
+  max-width: 960px;
+  margin: 40px auto;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.inventory-recent-page .inventory-header {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 28px 32px;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.inventory-recent-page .recent-panel {
+  padding: 32px;
+}
+
+.inventory-recent-page .recent-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.inventory-recent-page .recent-results-table th,
+.inventory-recent-page .recent-results-table td {
+  border: 1px solid var(--border-color);
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.inventory-recent-page .recent-results-table th {
+  background: #eff6ff;
+  color: var(--text-dark);
+}
+
+.inventory-recent-page .recent-results-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.inventory-recent-page .recent-results-table a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.inventory-recent-page .recent-results-table a:hover {
+  color: var(--primary-hover);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   #wrapper {
