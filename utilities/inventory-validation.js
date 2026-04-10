@@ -75,16 +75,6 @@ validate.inventoryRules = () => {
             .notEmpty()
             .withMessage("Please provide a description."),
 
-        body("inv_image")
-            .trim()
-            .notEmpty()
-            .withMessage("Please provide an image path."),
-
-        body("inv_thumbnail")
-            .trim()
-            .notEmpty()
-            .withMessage("Please provide a thumbnail path."),
-
         body("inv_price")
             .trim()
             .notEmpty()
@@ -114,8 +104,6 @@ validate.checkInventoryData = async (req, res, next) => {
         inv_model,
         inv_year,
         inv_description,
-        inv_image,
-        inv_thumbnail,
         inv_price,
         inv_miles,
         inv_color,
@@ -135,8 +123,6 @@ validate.checkInventoryData = async (req, res, next) => {
             inv_model,
             inv_year,
             inv_description,
-            inv_image,
-            inv_thumbnail,
             inv_price,
             inv_miles,
             inv_color,

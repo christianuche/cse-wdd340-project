@@ -18,7 +18,7 @@
       </ul>
       <% } %>
 
-    <form id="addInventoryForm" class="login-form" action="/inv/add-inventory" method="POST">
+    <form id="addInventoryForm" class="login-form" action="/inv/add-inventory" method="POST" enctype="multipart/form-data">
       <div class="form-section">
         <h2>Vehicle Information</h2>
 
@@ -56,15 +56,15 @@
         <h2>Media & Pricing</h2>
 
         <div class="form-group">
-          <label for="inv_image" class="form-label">Image Path</label>
-          <input type="text" id="inv_image" name="inv_image" class="form-input" required
-            value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>">
+          <label for="inv_image" class="form-label">Vehicle Image</label>
+          <input type="file" id="inv_image" name="inv_image" class="form-input" accept="image/*">
+          <small class="form-hint">Upload a vehicle image (JPG, PNG, GIF). If no file is uploaded, a default image will be used.</small>
         </div>
 
         <div class="form-group">
-          <label for="inv_thumbnail" class="form-label">Thumbnail Path</label>
-          <input type="text" id="inv_thumbnail" name="inv_thumbnail" class="form-input" required
-            value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>">
+          <label for="inv_thumbnail" class="form-label">Thumbnail Image</label>
+          <input type="file" id="inv_thumbnail" name="inv_thumbnail" class="form-input" accept="image/*">
+          <small class="form-hint">Upload a thumbnail image (JPG, PNG, GIF). If no file is uploaded, a default thumbnail will be used.</small>
         </div>
 
         <div class="form-group">

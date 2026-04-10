@@ -175,13 +175,24 @@ invCont.addInventory = async function (req, res, next) {
         inv_model,
         inv_year,
         inv_description,
-        inv_image,
-        inv_thumbnail,
         inv_price,
         inv_miles,
         inv_color,
         classification_id
     } = req.body
+
+    // Handle file uploads - use uploaded files or default images
+    let inv_image = '/images/vehicles/no-image.png'
+    let inv_thumbnail = '/images/vehicles/no-image-tn.png'
+
+    if (req.files) {
+        if (req.files.inv_image && req.files.inv_image[0]) {
+            inv_image = '/images/vehicles/' + req.files.inv_image[0].filename
+        }
+        if (req.files.inv_thumbnail && req.files.inv_thumbnail[0]) {
+            inv_thumbnail = '/images/vehicles/' + req.files.inv_thumbnail[0].filename
+        }
+    }
 
     const result = await invModel.addInventory(
         inv_make,

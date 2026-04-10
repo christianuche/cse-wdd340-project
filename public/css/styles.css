@@ -657,6 +657,29 @@ footer {
   opacity: 0.7;
 }
 
+/* File input styling */
+.form-input[type="file"] {
+  padding: 12px;
+  border-style: dashed;
+  cursor: pointer;
+}
+
+.form-input[type="file"]:focus {
+  border-color: var(--primary-color);
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Form hint text */
+.form-hint {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
 /* Password wrapper for show/hide functionality */
 .password-wrapper {
   position: relative;

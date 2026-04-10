@@ -4,6 +4,30 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation")
+const multer = require("multer")
+const path = require("path")
+
+// File upload configuration
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../public/images/vehicles/'))
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    fileFilter: function (req, file, cb) {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true)
+        } else {
+            cb(new Error('Only image files are allowed!'), false)
+        }
+    }
+})
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
@@ -58,6 +82,10 @@ router.post(
     "/add-inventory",
     utilities.checkJWTToken,
     utilities.checkAccountType,
+    upload.fields([
+        { name: 'inv_image', maxCount: 1 },
+        { name: 'inv_thumbnail', maxCount: 1 }
+    ]),
     invValidate.inventoryRules(),
     invValidate.checkInventoryData,
     utilities.handleErrors(invController.addInventory)
